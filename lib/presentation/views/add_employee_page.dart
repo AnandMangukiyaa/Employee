@@ -7,6 +7,7 @@ import 'package:employee/presentation/dialogs/calender_dialog.dart';
 import 'package:employee/presentation/widgets/primary_drop_down.dart';
 import 'package:employee/presentation/widgets/primary_text.dart';
 import 'package:employee/presentation/widgets/primary_text_field.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
@@ -54,7 +55,7 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
         children: [
           Expanded(
             child: Padding(
-              padding: EdgeInsets.all(Sizes.s16.w),
+              padding: EdgeInsets.all(kIsWeb ? Sizes.s16.h:Sizes.s16.w),
               child: Column(
                 children: [
                   PrimaryTextField(
@@ -65,12 +66,12 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
                       padding: EdgeInsets.symmetric(horizontal: Sizes.s12.w),
                       child: SvgPicture.asset(
                         AppAssets.employee,
-                        height: Sizes.s15.w,
-                        width: Sizes.s15.w,
+                        height: kIsWeb ? Sizes.s15.h:Sizes.s15.w,
+                        width: kIsWeb ? Sizes.s15.h:Sizes.s15.w,
                       ),
                     ),
                     radius: Sizes.s4.radius,
-                    padding: EdgeInsets.all(Sizes.s8.w),
+                    padding: EdgeInsets.all(kIsWeb ? Sizes.s8.h:Sizes.s8.w),
                   ),
                   SizedBox(
                     height: Sizes.s24.h,
@@ -87,15 +88,15 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
                       padding: EdgeInsets.symmetric(horizontal: Sizes.s12.w),
                       child: SvgPicture.asset(
                         AppAssets.designation,
-                        height: Sizes.s15.w,
-                        width: Sizes.s15.w,
+                        height: kIsWeb ? Sizes.s15.h:Sizes.s15.w,
+                        width: kIsWeb ? Sizes.s15.h:Sizes.s15.w,
                       ),
                     ),
                     radius: Sizes.s4.radius,
-                    padding: EdgeInsets.all(Sizes.s8.w),
+                    padding: EdgeInsets.all(kIsWeb ? Sizes.s8.h:Sizes.s8.w),
                     suffix: Padding(
-                      padding: EdgeInsets.all(Sizes.s12.w),
-                      child: SvgPicture.asset(AppAssets.down, height: Sizes.s15.w, width: Sizes.s15.w),
+                      padding: EdgeInsets.all(kIsWeb ? Sizes.s12.h:Sizes.s12.w),
+                      child: SvgPicture.asset(AppAssets.down, height: kIsWeb ? Sizes.s15.h:Sizes.s15.w, width: kIsWeb ? Sizes.s15.h:Sizes.s15.w),
                     ),
                   ),
                   SizedBox(
@@ -121,12 +122,12 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
                             padding: EdgeInsets.symmetric(horizontal: Sizes.s12.w),
                             child: SvgPicture.asset(
                               AppAssets.calender,
-                              height: Sizes.s15.w,
-                              width: Sizes.s15.w,
+                              height: kIsWeb ? Sizes.s15.h:Sizes.s15.w,
+                              width: kIsWeb ? Sizes.s15.h:Sizes.s15.w,
                             ),
                           ),
                           radius: Sizes.s4.radius,
-                          padding: EdgeInsets.all(Sizes.s8.w),
+                          padding: EdgeInsets.all(kIsWeb ? Sizes.s8.h:Sizes.s8.w),
                         ),
                       ),
                       SizedBox(
@@ -134,8 +135,8 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
                         child: Center(
                           child: SvgPicture.asset(
                             AppAssets.arrow,
-                            height: Sizes.s20.w,
-                            width: Sizes.s20.w,
+                            height: kIsWeb ? Sizes.s20.h:Sizes.s20.w,
+                            width: kIsWeb ? Sizes.s20.h:Sizes.s20.w,
                           ),
                         ),
                       ),
@@ -161,12 +162,12 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
                             padding: EdgeInsets.symmetric(horizontal: Sizes.s12.w),
                             child: SvgPicture.asset(
                               AppAssets.calender,
-                              height: Sizes.s15.w,
-                              width: Sizes.s15.w,
+                              height: kIsWeb ? Sizes.s15.h:Sizes.s15.w,
+                              width: kIsWeb ? Sizes.s15.h:Sizes.s15.w,
                             ),
                           ),
                           radius: Sizes.s4.radius,
-                          padding: EdgeInsets.all(Sizes.s8.w),
+                          padding: EdgeInsets.all(kIsWeb ? Sizes.s8.h:Sizes.s8.w),
                         ),
                       ),
                     ],
@@ -176,9 +177,9 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(Sizes.s16.w),
+            padding: EdgeInsets.all(kIsWeb ? Sizes.s16.h:Sizes.s16.w),
             width: double.infinity,
-            decoration: BoxDecoration(border: Border(top: BorderSide(width: Sizes.s1.w, color: AppColors.border))),
+            decoration: BoxDecoration(border: Border(top: BorderSide(width: kIsWeb ? Sizes.s1.h:Sizes.s1.w, color: AppColors.border))),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -290,8 +291,8 @@ class _AddEmployeePageState extends State<AddEmployeePage> {
               },
               child: Container(
                 width: double.infinity,
-                padding: EdgeInsets.all(Sizes.s16.w),
-                decoration: BoxDecoration(border: Border(bottom: BorderSide(color: AppColors.border, width: Sizes.s1.w))),
+                padding: EdgeInsets.all(kIsWeb ? Sizes.s16.h:Sizes.s16.w),
+                decoration: BoxDecoration(border: Border(bottom: BorderSide(color: AppColors.border, width: kIsWeb ? Sizes.s1.h:Sizes.s1.w))),
                 child: Center(
                   child: PrimaryText(
                     posts[index],

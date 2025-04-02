@@ -5,6 +5,7 @@ import 'package:employee/presentation/bloc/employee_bloc.dart';
 import 'package:employee/presentation/bloc/employee_event.dart';
 import 'package:employee/presentation/bloc/employee_state.dart';
 import 'package:employee/presentation/widgets/primary_text.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -117,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         },
                         child: Container(
-                          padding: EdgeInsets.all(Sizes.s16.w),
+                          padding: EdgeInsets.all(kIsWeb ? Sizes.s16.h:Sizes.s16.w),
                           child: Row(
                             children: [
                               Column(
@@ -209,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           },
                           child: Container(
-                            padding: EdgeInsets.all(Sizes.s16.w),
+                            padding: EdgeInsets.all(kIsWeb ? Sizes.s16.h:Sizes.s16.w),
                             child: Row(
                               children: [
                                 Column(
@@ -284,8 +285,8 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: Container(
         decoration: BoxDecoration(color: AppColors.primary, borderRadius: BorderRadius.circular(Sizes.s8.radius)),
-        height: Sizes.s50.w,
-        width: Sizes.s50.w,
+        height: kIsWeb ? Sizes.s50.h:Sizes.s50.w,
+        width: kIsWeb ? Sizes.s50.h:Sizes.s50.w,
         child: Material(
           color: Colors.transparent,
           child: InkWell(
@@ -295,13 +296,13 @@ class _HomePageState extends State<HomePage> {
             splashColor: AppColors.secondary,
             borderRadius: BorderRadius.circular(Sizes.s8.radius),
             child: SizedBox(
-              height: Sizes.s50.w,
-              width: Sizes.s50.w,
+              height: kIsWeb ? Sizes.s50.h:Sizes.s50.w,
+              width: kIsWeb ? Sizes.s50.h:Sizes.s50.w,
               child: Center(
                 child: Icon(
                   Icons.add,
                   color: Colors.white,
-                  size: Sizes.s20.w,
+                  size: kIsWeb ? Sizes.s20.h:Sizes.s20.w,
                 ),
               ),
             ),

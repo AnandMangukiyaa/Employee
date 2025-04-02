@@ -62,7 +62,7 @@ class _CalenderDialogState extends State<CalenderDialog> {
   @override
   Widget build(BuildContext context) {
     return kIsWeb?Container(
-      width: MediaQuery.of(context).size.width * 0.7,
+      width: MediaQuery.of(context).size.width * 0.5,
       height: MediaQuery.of(context).size.height * 0.7 ,
       padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
@@ -100,7 +100,7 @@ class _CalenderDialogState extends State<CalenderDialog> {
                     ),
                   ),
                 ),),
-                SizedBox(width: Sizes.s16.w,),
+                SizedBox(width: kIsWeb ? Sizes.s16.h:Sizes.s16.w,),
                 Expanded(child: Container(
                   decoration: BoxDecoration(
                       color: AppColors.secondaryButton,
@@ -161,7 +161,7 @@ class _CalenderDialogState extends State<CalenderDialog> {
                     ),
                   ),
                 ),),
-                SizedBox(width: Sizes.s16.w,),
+                SizedBox(width: kIsWeb ? Sizes.s16.h:Sizes.s16.w,),
                 Expanded(child: Container(
                   decoration: BoxDecoration(
                       color: selectedIndex == 1 ?AppColors.primary:AppColors.secondaryButton,
@@ -192,7 +192,7 @@ class _CalenderDialogState extends State<CalenderDialog> {
                 ),),
               ],
             ),
-              SizedBox(height: Sizes.s16.w,),
+              SizedBox(height: Sizes.s16.h,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -224,7 +224,7 @@ class _CalenderDialogState extends State<CalenderDialog> {
                       ),
                     ),
                   ),),
-                  SizedBox(width: Sizes.s16.w,),
+                  SizedBox(width: kIsWeb ? Sizes.s16.h:Sizes.s16.w,),
                   Expanded(child: Container(
                     decoration: BoxDecoration(
                         color: selectedIndex == 3 ?AppColors.primary:AppColors.secondaryButton,
@@ -290,10 +290,10 @@ class _CalenderDialogState extends State<CalenderDialog> {
             getDateRangePicker(),
             SizedBox(height: Sizes.s24.h),
             Container(
-              padding: EdgeInsets.all(Sizes.s16.w),
+              padding: EdgeInsets.all(kIsWeb ? Sizes.s16.h:Sizes.s16.w),
               width: double.infinity,
               decoration: BoxDecoration(
-                  border: Border(top:BorderSide(width: Sizes.s1.w,color: AppColors.border))
+                  border: Border(top:BorderSide(width: kIsWeb ? Sizes.s1.h:Sizes.s1.w,color: AppColors.border))
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -301,7 +301,7 @@ class _CalenderDialogState extends State<CalenderDialog> {
                 children: [
                   Expanded(child: Row(
                     children: [
-                      SvgPicture.asset(AppAssets.calender,height: Sizes.s20.w,width: Sizes.s20.w,),
+                      SvgPicture.asset(AppAssets.calender,height: kIsWeb ? Sizes.s20.h:Sizes.s20.w,width: kIsWeb ? Sizes.s20.h:Sizes.s20.w,),
                       SizedBox(width: Sizes.s8.w,),
                       PrimaryText("${date != null ? DateFormat("d MMM yyyy").format(date!):"No Date"}",size: Sizes.s16.sp,)
                     ],
@@ -492,7 +492,7 @@ class _CalenderDialogState extends State<CalenderDialog> {
                   ),),
                 ],
               ),
-              SizedBox(height: Sizes.s16.w,),
+              SizedBox(height: Sizes.s16.h,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -590,10 +590,10 @@ class _CalenderDialogState extends State<CalenderDialog> {
               getDateRangePicker(),
               SizedBox(height: Sizes.s24.h),
               Container(
-                padding: EdgeInsets.all(Sizes.s16.w),
+                padding: EdgeInsets.all(kIsWeb ? Sizes.s16.h:Sizes.s16.w),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    border: Border(top:BorderSide(width: Sizes.s1.w,color: AppColors.border))
+                    border: Border(top:BorderSide(width: kIsWeb ? Sizes.s1.h:Sizes.s1.w,color: AppColors.border))
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -601,7 +601,7 @@ class _CalenderDialogState extends State<CalenderDialog> {
                   children: [
                     Expanded(child: Row(
                       children: [
-                        SvgPicture.asset(AppAssets.calender,height: Sizes.s20.w,width: Sizes.s20.w,),
+                        SvgPicture.asset(AppAssets.calender,height: kIsWeb ? Sizes.s20.h:Sizes.s20.w,width: kIsWeb ? Sizes.s20.h:Sizes.s20.w,),
                         SizedBox(width: Sizes.s8.w,),
                         PrimaryText("${date != null ? DateFormat("d MMM yyyy").format(date!):"No Date"}",size: Sizes.s16.sp,)
                       ],

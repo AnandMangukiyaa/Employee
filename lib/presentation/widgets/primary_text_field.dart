@@ -1,4 +1,5 @@
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:employee/core/constants/constants.dart';
@@ -183,7 +184,7 @@ class PrimaryTextField extends StatelessWidget {
 
   OutlineInputBorder _border(Color color) {
     return OutlineInputBorder(
-      borderSide: BorderSide(color: color, width: Sizes.s1.w),
+      borderSide: BorderSide(color: color, width: kIsWeb ? Sizes.s1.h:Sizes.s1.w),
       borderRadius: BorderRadius.circular(radius ?? Sizes.s8.radius),
     );
   }
