@@ -693,6 +693,20 @@ class _CalenderDialogState extends State<CalenderDialog> {
           navigationMode: DateRangePickerNavigationMode.snap,
           showNavigationArrow: true,
           headerHeight: 0,
+          onViewChanged: (args){
+            if(args.view == DateRangePickerView.month){
+              SchedulerBinding.instance.addPostFrameCallback((callback){
+                setState(() {
+                  final DateTime visibleStartDate = args.visibleDateRange.startDate!;
+                  final DateTime visibleEndDate = args.visibleDateRange.endDate!;
+                  final int totalVisibleDays = (visibleEndDate.difference(visibleStartDate).inDays);
+                  date =
+                  visibleStartDate.add(Duration(days: (totalVisibleDays ~/ 2).toInt()));
+                });
+              });
+
+            }
+          },
           monthViewSettings: DateRangePickerMonthViewSettings(
             firstDayOfWeek: 1,
             showTrailingAndLeadingDates: true,

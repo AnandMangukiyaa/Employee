@@ -64,120 +64,29 @@ class _HomePageState extends State<HomePage> {
             }
             List<Employee> currentEmployees = state.employees.where((e) => e.endDate == null).toList();
             List<Employee> previousEmployees = state.employees.where((e) => e.endDate != null).toList();
-            return Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(color: Color(0xfff5f5f5)),
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(vertical: Sizes.s16.h, horizontal: Sizes.s16.w),
-                  child: PrimaryText(
-                    "Current Employees",
-                    size: Sizes.s16.sp,
-                    weight: FontWeight.w500,
-                    color: AppColors.primary,
-                  ),
-                ),
-                ...List.generate(currentEmployees.length, (index) {
-                  return SizedBox(
-                    width: double.infinity,
-                    child: GestureDetector(
-                      onTap: (){
-                        Navigator.pushNamed(context, Routes.addEmployee, arguments: currentEmployees[index]);
-                      },
-                      child: Dismissible(
-                        key: UniqueKey(),
-                        direction: DismissDirection.endToStart,
-                        background: ColoredBox(
-                          color: Colors.red,
-                          child: Align(
-                            alignment: Alignment.centerRight,
-                            child: Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: SvgPicture.asset(AppAssets.delete),
-                            ),
-                          ),
-                        ),
-                        confirmDismiss: (direction) async {
-                          Employee employee = currentEmployees[index];
-                          GetIt.I<EmployeeBloc>().add(DeleteEmployee(currentEmployees[index]));
-                          var snackBar = SnackBar(
-                            content: Text("Employee data has been deleted"),
-                            backgroundColor: Colors.black,
-                            behavior: SnackBarBehavior.floating,
-                            elevation: 2,
-                            duration: const Duration(milliseconds: 2000),
-                            action: SnackBarAction(
-                              label: "UNDO",
-                              textColor: AppColors.primary,
-                              onPressed: () {
-                                GetIt.I<EmployeeBloc>().add(AddEmployee(employee));
-                              },
-                            ),
-                          );
-
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(kIsWeb ? Sizes.s16.h:Sizes.s16.w),
-                          child: Row(
-                            children: [
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  PrimaryText(
-                                    currentEmployees[index].name!,
-                                    size: Sizes.s16.sp,
-                                    weight: FontWeight.w500,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(
-                                    height: Sizes.s8.h,
-                                  ),
-                                  PrimaryText(
-                                    currentEmployees[index].designation!,
-                                    size: Sizes.s14.sp,
-                                    weight: FontWeight.w400,
-                                    color: AppColors.darkGrey,
-                                  ),
-                                  SizedBox(
-                                    height: Sizes.s8.h,
-                                  ),
-                                  PrimaryText(
-                                    "From ${currentEmployees[index].startDate!}",
-                                    size: Sizes.s12.sp,
-                                    weight: FontWeight.w400,
-                                    color: Colors.grey,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                }),
-                if (previousEmployees.isNotEmpty) ...[
+            return SingleChildScrollView(
+              child: Column(
+                children: [
                   Container(
                     decoration: BoxDecoration(color: Color(0xfff5f5f5)),
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(vertical: Sizes.s16.h, horizontal: Sizes.s16.w),
                     child: PrimaryText(
-                      "Previous Employees",
+                      "Current Employees",
                       size: Sizes.s16.sp,
                       weight: FontWeight.w500,
                       color: AppColors.primary,
                     ),
                   ),
-                  ...List.generate(previousEmployees.length, (index) {
-                    return Container(
-                      width: ScreenUtil().screenWidth,
+                  ...List.generate(currentEmployees.length, (index) {
+                    return SizedBox(
+                      width: double.infinity,
                       child: GestureDetector(
                         onTap: (){
-                          Navigator.pushNamed(context, Routes.addEmployee, arguments: previousEmployees[index]);
+                          Navigator.pushNamed(context, Routes.addEmployee, arguments: currentEmployees[index]);
                         },
                         child: Dismissible(
+                          key: UniqueKey(),
                           direction: DismissDirection.endToStart,
                           background: ColoredBox(
                             color: Colors.red,
@@ -190,8 +99,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           confirmDismiss: (direction) async {
-                            Employee employee = previousEmployees[index];
-                            GetIt.I<EmployeeBloc>().add(DeleteEmployee(previousEmployees[index]));
+                            Employee employee = currentEmployees[index];
+                            GetIt.I<EmployeeBloc>().add(DeleteEmployee(currentEmployees[index]));
                             var snackBar = SnackBar(
                               content: Text("Employee data has been deleted"),
                               backgroundColor: Colors.black,
@@ -218,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     PrimaryText(
-                                      previousEmployees[index].name!,
+                                      currentEmployees[index].name!,
                                       size: Sizes.s16.sp,
                                       weight: FontWeight.w500,
                                       color: Colors.black,
@@ -227,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                                       height: Sizes.s8.h,
                                     ),
                                     PrimaryText(
-                                      previousEmployees[index].designation!,
+                                      currentEmployees[index].designation!,
                                       size: Sizes.s14.sp,
                                       weight: FontWeight.w400,
                                       color: AppColors.darkGrey,
@@ -236,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                                       height: Sizes.s8.h,
                                     ),
                                     PrimaryText(
-                                      "${previousEmployees[index].startDate!} - ${previousEmployees[index].endDate!}",
+                                      "From ${currentEmployees[index].startDate!}",
                                       size: Sizes.s12.sp,
                                       weight: FontWeight.w400,
                                       color: Colors.grey,
@@ -246,11 +155,105 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-                          key: UniqueKey(),
                         ),
                       ),
                     );
                   }),
+                  if (previousEmployees.isNotEmpty) ...[
+                    Container(
+                      decoration: BoxDecoration(color: Color(0xfff5f5f5)),
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(vertical: Sizes.s16.h, horizontal: Sizes.s16.w),
+                      child: PrimaryText(
+                        "Previous Employees",
+                        size: Sizes.s16.sp,
+                        weight: FontWeight.w500,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                    ...List.generate(previousEmployees.length, (index) {
+                      return Container(
+                        width: ScreenUtil().screenWidth,
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.pushNamed(context, Routes.addEmployee, arguments: previousEmployees[index]);
+                          },
+                          child: Dismissible(
+                            direction: DismissDirection.endToStart,
+                            background: ColoredBox(
+                              color: Colors.red,
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: SvgPicture.asset(AppAssets.delete),
+                                ),
+                              ),
+                            ),
+                            confirmDismiss: (direction) async {
+                              Employee employee = previousEmployees[index];
+                              GetIt.I<EmployeeBloc>().add(DeleteEmployee(previousEmployees[index]));
+                              var snackBar = SnackBar(
+                                content: Text("Employee data has been deleted"),
+                                backgroundColor: Colors.black,
+                                behavior: SnackBarBehavior.floating,
+                                elevation: 2,
+                                duration: const Duration(milliseconds: 2000),
+                                action: SnackBarAction(
+                                  label: "UNDO",
+                                  textColor: AppColors.primary,
+                                  onPressed: () {
+                                    GetIt.I<EmployeeBloc>().add(AddEmployee(employee));
+                                  },
+                                ),
+                              );
+
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(kIsWeb ? Sizes.s16.h:Sizes.s16.w),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      PrimaryText(
+                                        previousEmployees[index].name!,
+                                        size: Sizes.s16.sp,
+                                        weight: FontWeight.w500,
+                                        color: Colors.black,
+                                      ),
+                                      SizedBox(
+                                        height: Sizes.s8.h,
+                                      ),
+                                      PrimaryText(
+                                        previousEmployees[index].designation!,
+                                        size: Sizes.s14.sp,
+                                        weight: FontWeight.w400,
+                                        color: AppColors.darkGrey,
+                                      ),
+                                      SizedBox(
+                                        height: Sizes.s8.h,
+                                      ),
+                                      PrimaryText(
+                                        "${previousEmployees[index].startDate!} - ${previousEmployees[index].endDate!}",
+                                        size: Sizes.s12.sp,
+                                        weight: FontWeight.w400,
+                                        color: Colors.grey,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            key: UniqueKey(),
+                          ),
+                        ),
+                      );
+                    }),
+
+                  ],
                   Container(
                     decoration: BoxDecoration(color: Color(0xfff5f5f5)),
                     width: double.infinity,
@@ -262,8 +265,8 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.grey,
                     ),
                   ),
-                ]
-              ],
+                ],
+              ),
             );
           } else if (state is EmployeeError) {
             return Center(
